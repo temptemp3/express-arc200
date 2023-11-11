@@ -1,7 +1,7 @@
 // app.js
 import express from "express";
 import algosdk from "algosdk";
-import arc200 from "arc200";
+import arc200 from "arc200js";
 import dotenv from "dotenv";
 dotenv.config();
 
