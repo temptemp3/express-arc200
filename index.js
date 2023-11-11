@@ -157,3 +157,5 @@ app.get(
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
+
+export default app;
