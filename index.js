@@ -68,28 +68,28 @@ async function handleAbiMethod(req, res, methodName) {
 }
 
 // Define a route
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Hello, World!");
 });
 
 // Routes for each ABI method with updated paths
-app.get("/assets/:tokenId/name", validateTokenId, async (req, res) => {
+app.get("/api/assets/:tokenId/name", validateTokenId, async (req, res) => {
   await handleAbiMethod(req, res, "arc200_name");
 });
 
-app.get("/assets/:tokenId/symbol", validateTokenId, async (req, res) => {
+app.get("/api/assets/:tokenId/symbol", validateTokenId, async (req, res) => {
   await handleAbiMethod(req, res, "arc200_symbol");
 });
 
-app.get("/assets/:tokenId/totalSupply", validateTokenId, async (req, res) => {
+app.get("/api/assets/:tokenId/totalSupply", validateTokenId, async (req, res) => {
   await handleAbiMethod(req, res, "arc200_totalSupply");
 });
 
-app.get("/assets/:tokenId/decimals", validateTokenId, async (req, res) => {
+app.get("/api/assets/:tokenId/decimals", validateTokenId, async (req, res) => {
   await handleAbiMethod(req, res, "arc200_decimals");
 });
 
-app.get("/assets/:tokenId", validateTokenId, async (req, res) => {
+app.get("/api/assets/:tokenId", validateTokenId, async (req, res) => {
   try {
     const { tokenId } = req.params;
     const arc200Instance = new arc200(Number(tokenId), algodClient);
@@ -124,7 +124,7 @@ app.get("/assets/:tokenId", validateTokenId, async (req, res) => {
 });
 
 app.get(
-  "/assets/:tokenId/transfer/:addrFrom/:addrTo/:amt",
+  "/api/assets/:tokenId/transfer/:addrFrom/:addrTo/:amt",
   validateTokenId,
   async (req, res) => {
     try {
