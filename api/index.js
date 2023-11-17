@@ -90,6 +90,22 @@ app.get("/api/assets/:tokenId/decimals", validateTokenId, async (req, res) => {
   await handleAbiMethod(req, res, "arc200_decimals");
 });
 
+app.get("/api/assets/:tokenId/balance/:addr", validateTokenId, async (req, res) => {
+  try {
+    const { tokenId, addr } = req.params;
+    const arc200Instance = new arc200(Number(tokenId), algodClient);
+    const balanceResponse = await arc200Instance.arc200_balanceOf(addr);
+
+    if (balanceResponse.success) {
+      res.json({ success: true, response: `${balanceResponse.returnValue}` });
+    } else {
+      res.status(404).json({ success: false, error: "Token not found" });
+    }
+  } catch (error) {
+    handleErrorResponse(res, error);
+  }
+});
+
 app.get("/api/assets/:tokenId", validateTokenId, async (req, res) => {
   try {
     const { tokenId } = req.params;
